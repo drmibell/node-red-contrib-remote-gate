@@ -17,7 +17,7 @@
 module.exports = function(RED) {
     "use strict";
 
-    function LinkInNode(n) {
+    function Link2InNode(n) {
         RED.nodes.createNode(this,n);
         var node = this;
         var event = "node:"+n.id;
@@ -34,9 +34,9 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("link in",LinkInNode);
+    RED.nodes.registerType("link in",Link2InNode);
 
-    function LinkOutNode(n) {
+    function Link2OutNode(n) {
         RED.nodes.createNode(this,n);
         var node = this;
         var event = "node:"+n.id;
@@ -46,5 +46,5 @@ module.exports = function(RED) {
             this.send(msg);
         });
     }
-    RED.nodes.registerType("link out",LinkOutNode);
+    RED.nodes.registerType("link out",Link2OutNode);
 }
