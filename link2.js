@@ -34,7 +34,7 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("link in",Link2InNode);
+    RED.nodes.registerType("link2 in",Link2InNode);
 
     function Link2OutNode(n) {
         RED.nodes.createNode(this,n);
@@ -46,5 +46,5 @@ module.exports = function(RED) {
             this.send(msg);
         });
     }
-    RED.nodes.registerType("link out",Link2OutNode);
+    RED.nodes.registerType("link2 out",Link2OutNode);
 }
