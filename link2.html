@@ -1,32 +1,32 @@
 
-<script type="text/x-red" data-template-name="link in">
+<script type="text/x-red" data-template-name="link2 in">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
         <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
     </div>
     <div class="form-row node-input-link-row"></div>
 </script>
-<script type="text/x-red" data-template-name="link out">
+<script type="text/x-red" data-template-name="link2 out">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
         <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
     </div>
     <div class="form-row node-input-link-row"></div>
 </script>
-<script type="text/x-red" data-help-name="link in">
+<script type="text/x-red" data-help-name="link2 in">
     <p>Create virtual wires between flows.</p>
     <h3>Details</h3>
-    <p>The node can be connected to any <code>link out</code> node that exists on any tab.
+    <p>The node can be connected to any <code>link2 out</code> node that exists on any tab.
        Once connected, they behave as if they were wired together.</p>
     <p>The wires between link nodes are only displayed when a link node is selected.
        If there are any wires to other tabs, a virtual node is shown that can be clicked
        on to jump to the appropriate tab.</p>
     <p><b>Note: </b>Links cannot be created going into, or out of, a subflow.</p>
 </script>
-<script type="text/x-red" data-help-name="link out">
+<script type="text/x-red" data-help-name="link2 out">
     <p>Create virtual wires between flows.</p>
     <h3>Details</h3>
-    <p>The node can be connected to any <code>link in</code> node that exists on any tab.
+    <p>The node can be connected to any <code>link2 in</code> node that exists on any tab.
        Once connected, they behave as if they were wired together.</p>
     <p>The wires between link nodes are only displayed when a link node is selected.
        If there are any wires to other tabs, a virtual node is show that can be clicked
@@ -257,7 +257,7 @@
         }
     }
 
-    RED.nodes.registerType('link in',{
+    RED.nodes.registerType('link2 in',{
         category: 'input',
         color:"#ddd",//"#87D8CF",
         defaults: {
@@ -277,7 +277,7 @@
             return this.name?"node_label_italic":"";
         },
         oneditprepare: function() {
-            onEditPrepare(this,"link out");
+            onEditPrepare(this,"link2 out");
         },
         oneditsave: function() {
             onEditSave(this);
@@ -286,7 +286,7 @@
         oneditresize: resizeNodeList
     });
 
-    RED.nodes.registerType('link out',{
+    RED.nodes.registerType('link2 out',{
         category: 'output',
         color:"#ddd",//"#87D8CF",
         defaults: {
@@ -307,7 +307,7 @@
             return this.name?"node_label_italic":"";
         },
         oneditprepare: function() {
-            onEditPrepare(this,"link in");
+            onEditPrepare(this,"link2 in");
         },
         oneditsave: function() {
             onEditSave(this);
