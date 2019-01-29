@@ -1,5 +1,5 @@
 <!--
-  Copyright 2018 M. I. Bell
+  Copyright 2019 M. I. Bell
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -107,11 +107,11 @@
 <script type="text/x-red" data-help-name="gate-ctrl">
     <p>Controls the state of <code>rc-gate</code> nodes.</p>
     <p>The node can control any <code>rc-gate</code> node on any tab. Connections
-    between the <code>rc-gate</code> and <code>gate-ctl</code> nodes are established 
+    between the <code>gate-ctrl</code> and <code>rc-gate</code> nodes are established 
     through the <code>Topic</code> definitions of the nodes. Nodes with matching topics are
-    connected, and a node with no defined topic is connected to every node of the other type. 
-    The <code>gate-ctl</code> node has an option (checkbox) that allows it to obtain its
-    <code>Topic</code> from the incoming message.</p>
+    connected, and all <code>rc-gate</code> nodes will respond to <code>gate-ctrl</code> nodes
+    with <code>Topic = 'all'</code>.  The <code>gate-ctl</code> node also has an option
+    (checkbox) that allows it to obtain its <code>Topic</code> from the incoming message.</p>
 </p></script>
 
 <script type="text/javascript">
