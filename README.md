@@ -22,6 +22,10 @@ The state of the gate is indicated by a status object: text and either a green d
 ## State persistence
 By default, the node enters the `Default State` on startup, either when first deployed in the editor, re-deployed as part of a modified flow or entire workspace, or when Node-RED is restarted by the user or by a system service. The user can, however, select the `Restore from saved state` option (checkbox) in the edit dialog. Then, if a persistent form of context storage has been enabled in the Node-RED `settings.js` file, the node will attempt to enter the state last saved in the node context and will use the `Default State` only if no saved state is available.
 
+## Limitations
+A flow or project (set of tabs) can contain as many `rc-gate` nodes as desired, but adding 
+gates beyond a total of 15 will cause a warning message (`MaxListenersExceededWarning`) to be logged. This is a feature of `node.js` intended to detect memory leaks, and can be disregarded unless it occurs with a smaller number of gates or appears during execution of the flow. The limit has already been increased from its default value (corresponding to 5 gates), but it can be increased further or removed altogether in future versions if the warnings prove troublesome.
+
 ## Examples
 ### Basic Operation
 This flow demonstrates the basic operation of the `rc-gate` and `gate-ctrl` nodes.

@@ -51,7 +51,7 @@ module.exports = function(RED) {
         status = (state === 'open') ? openStatus:closedStatus;
         node.status(status);
         // Deploy event handlers
-//        emitter.setMaxListeners()
+        RED.events.setMaxListeners(30);
         RED.events.on('all',handler);
         RED.events.on(event,handler);
         // Process inputs
