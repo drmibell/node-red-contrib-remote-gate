@@ -1,5 +1,5 @@
 /**
- * Copyright JS Foundation and other contributors, http://js.foundation
+ * Copyright 2019 M. I. Bell
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+ 
 module.exports = function(RED) {
     "use strict";
     var events = require('events');
 
-//    function Link2InNode(n) { // RemoteGateNode debug
-    function RemoteGateNode(n) { // RemoteGateNode debug
+    function RemoteGateNode(n) {
         RED.nodes.createNode(this,n);
         const openStatus = {fill:"green",shape:"dot",text:"open"};
         const closedStatus = {fill:'red',shape:'ring',text:'closed'};
@@ -36,7 +35,6 @@ module.exports = function(RED) {
         var node = this;
         // Event handler
         var handler = function(msg) {
-//            msg._event = n.event;
             msg.topic = 'ctrl';
             node.receive(msg);
         }
@@ -53,6 +51,7 @@ module.exports = function(RED) {
         status = (state === 'open') ? openStatus:closedStatus;
         node.status(status);
         // Deploy event handlers
+//        emitter.setMaxListeners()
         RED.events.on('all',handler);
         RED.events.on(event,handler);
         // Process inputs
@@ -106,12 +105,9 @@ module.exports = function(RED) {
             RED.events.removeListener('all',handler);
         });
     }
+    RED.nodes.registerType("rc-gate",RemoteGateNode);
 
-//    RED.nodes.registerType("link2 in",Link2InNode); // 'rc-gate',RemoteGateNode debug
-    RED.nodes.registerType("rc-gate",RemoteGateNode); // debug
-
-//    function Link2OutNode(n) { // GateControlNode debug
-    function GateControlNode(n) { // GateControlNode debug
+    function GateControlNode(n) {
         RED.nodes.createNode(this,n);
         this.topic = n.topic;
         this.useMsgTopic = n.useMsgTopic;
@@ -126,6 +122,5 @@ module.exports = function(RED) {
             this.send(msg);
         });
     }
-//    RED.nodes.registerType("link2 out",Link2OutNode); // "gate-ctrl",GateControlNode debug
-    RED.nodes.registerType("gate-ctrl",GateControlNode); // "gate-ctrl",GateControlNode debug
+    RED.nodes.registerType("gate-ctrl",GateControlNode);
 }
