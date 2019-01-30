@@ -23,11 +23,15 @@ The state of the gate is indicated by a status object: text and either a green d
 By default, the node enters the `Default State` on startup, either when first deployed in the editor, re-deployed as part of a modified flow or entire workspace, or when Node-RED is restarted by the user or by a system service. The user can, however, select the `Restore from saved state` option (checkbox) in the edit dialog. Then, if a persistent form of context storage has been enabled in the Node-RED `settings.js` file, the node will attempt to enter the state last saved in the node context and will use the `Default State` only if no saved state is available.
 
 ## Caution
-These nodes should be used with care, since they can make flows difficult to debug or modify. By passing control messages directly between `gate-ctrl` and `rc-gate` nodes, they violate a basic design principle of Node-RED: that nodes communicate by passing messages along wires. As an aid to tracing the flow of control messages, each node will display its `Topic` in the editor if its `Name` is left blank. This can be seen by deleting the node names in either of the examples below.
+These nodes should be used with care, since they can make flows difficult to debug or modify. By passing control messages directly between `gate-ctrl` and `rc-gate` nodes, they violate a basic design principle of Node-RED: that nodes communicate by passing messages along wires. As an aid to tracing the flow of control messages, each node will display its `Topic` in the editor if its `Name` is left blank. This can be seen by deleting the node names in either of the examples below. 
+
+Future versions of Node-RED will probably continue to support the communication mechanism used by these nodes, but it is not likely that they will be able to take advantage of any new mechanisms introduced for exchanging messages between multiple instances of Node-RED or with other modules.
 
 ## Limitations
 A flow or project (set of tabs) can contain as many `rc-gate` nodes as desired, but adding 
-gates beyond a total of 15 will cause a warning message (`MaxListenersExceededWarning`) to be logged. This is a feature of `node.js` intended to detect memory leaks, and can be disregarded unless it occurs with a smaller number of gates or appears during execution of the flow. The limit has already been increased from its default value (corresponding to 5 gates), but it can be increased further or removed altogether in future versions if the warnings prove troublesome.
+gates beyond a total of 15 will cause a warning message (`MaxListenersExceededWarning`) to be logged. This is a feature of `node.js` intended to detect memory leaks, and can be disregarded unless it occurs with a smaller number of gates or appears during execution of the flow. The limit has already been increased from its default value (corresponding to 5 gates), but it can be increased further or removed altogether in future versions if the warnings prove troublesome. 
+
+These nodes can be used in subflows, but each instance of the subflow will behave identically, since it is not currently possible to assign a distinct `Topic` to the nodes in each instance. Also an `rc-gate` in a subflow has no way to indicate its status in the editor at this time.
 
 ## Examples
 ### Basic Operation
