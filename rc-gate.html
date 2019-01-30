@@ -134,10 +134,10 @@
         icon: "arrow-in.png",
         paletteLabel: "rc–gate",
         label: function() {
-            return this.name||"rc-gate";
+            return this.name||this.topic||"rc-gate";
         },
         labelStyle: function() {
-            return this.name?"node_label_italic":"";
+            return (this.name||this.topic)?"node_label_italic":"";
         }
 //        ,
 /*        oneditprepare: function() {
@@ -165,10 +165,10 @@
         icon: "link-out.png",
         paletteLabel: "gate–ctrl",
         label: function() {
-            return this.name||"gate-ctl";
+            return this.name||this.topic||"gate-ctl";
         },
         labelStyle: function() {
-            return this.name?"node_label_italic":"";
+            return (this.name||this.topic)?"node_label_italic":"";
         }
     });
 </script>
