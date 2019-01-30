@@ -14,13 +14,16 @@ The `rc-gate` node will transmit the input message to its output when in the `op
 
 Control messages are received by `rc-gate` nodes from `gate-ctrl` nodes via a publish/subscribe mechanism based on `node.js` events. These messages set the state of the gate and can have values representing `open`, `close`, `toggle`, and `default`. Except for this remote-control feature, operation of the `rc-gate` is identical to that of the `gate` node published as [node-red-contrib-simple-gate](https://flows.nodered.org/node/node-red-contrib-simple-gate). The (case-insensitive) strings representing the commands are set by the user when the `rc-gate` node is deployed. If a control message is received but not recognized, there is no output or change of state, and the node reports an error. When first deployed or after a `default` command, the gate is in the user-selected state defined by `Default State` (see below regarding persistence).
 
-An `rc-gate` node can be controlled by any `gate-ctrl` node on any tab. Connections between the `rc-gate` and `gate-ctrl` nodes are established through the `Topic` definitions of each node. Nodes with matching topics are connected, and every `rc-gate` node is automatically subscribed to the topic `all` as well as to the topic defined in its own edit dialog. This makes it possible to both set the state of many gates simultaneously and control them individually. The `gate control` node also has a `Use message topic` option (checkbox) that allows it to obtain its topic from the incoming message. 
+An `rc-gate` node can be controlled by any `gate-ctrl` node on any tab. Connections between the `rc-gate` and `gate-ctrl` nodes are established through the `Topic` definitions of each node. Nodes with matching topics are connected, and every `rc-gate` node is automatically subscribed to the topic `all` as well as to the topic defined in its own edit dialog. This makes it possible to both set the state of many gates simultaneously and control them individually. The `gate-ctrl` node also has a `Use message topic` option (checkbox) that allows it to obtain its topic from the incoming message. 
 
 ## Node status
 The state of the gate is indicated by a status object: text and either a green dot (`open`) or a red ring (`closed`).
 
 ## State persistence
 By default, the node enters the `Default State` on startup, either when first deployed in the editor, re-deployed as part of a modified flow or entire workspace, or when Node-RED is restarted by the user or by a system service. The user can, however, select the `Restore from saved state` option (checkbox) in the edit dialog. Then, if a persistent form of context storage has been enabled in the Node-RED `settings.js` file, the node will attempt to enter the state last saved in the node context and will use the `Default State` only if no saved state is available.
+
+## Caution
+These nodes should be used with care, since they can make flows difficult to debug or modify. By passing control messages directly between `gate-ctrl` and `rc-gate` nodes, they violate a basic design principle of Node-RED: that nodes communicate by passing messages along wires. As an aid to tracing the flow of control messages, each node will display its `Topic` in the editor if its `Name` is left blank. This can be seen by deleting the node names in either of the examples below.
 
 ## Limitations
 A flow or project (set of tabs) can contain as many `rc-gate` nodes as desired, but adding 
